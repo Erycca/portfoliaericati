@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Érica Silva | Análise de Dados & Cloud</title>
+    <!-- Fontes elegantes para um visual editorial e moderno -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Ícones modernos para as redes sociais e interface -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* 1. CONFIGURAÇÕES GERAIS E CORES (Tons de Bege e Grafite) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'DM Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #FAF6F0; /* Bege suave sofisticado */
+            color: #2D2A26; /* Texto grafite escuro */
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding-top: 70px; /* Espaço para a barra de pesquisa fixa */
+        }
+
+        /* 2. BARRA SUPERIOR FIXA COM PESQUISA */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background-color: rgba(250, 246, 240, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid #EAE3D5;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+        }
+
+        .navbar-brand {
+            font-family: 'Merriweather', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1C1A17;
+            text-decoration: none;
+        }
+
+        .navbar-brand span {
+            color: #005C8A;
+        }
+
+        /* Menu de Navegação Superior */
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #615B54;
+            font-weight: bold;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #005C8A;
+        }
+
+        .nav-divider {
+            color: #D5CDBC;
+            user-select: none;
+        }
+
+        /* 3. SECÇÃO PRINCIPAL (HERO COM GRID ADAPTATIVO) */
+        .hero-container {
+            max-width: 1100px;
+            margin: 40px auto 60px auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 1.4fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        @media (max-width: 868px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                margin-top: 20px;
+            }
+            .profile-wrapper {
+                order: -1; /* Imagem do perfil fica no topo em ecrãs móveis */
+                margin: 0 auto;
+            }
+        }
+
+        .hero-text h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 3rem;
+            color: #1C1A17;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero-text h1 span {
+            color:#1C1A17;
+        }
+
+        .subtitle-top {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #005C8A;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .hero-text p {
+            font-size: 1.15rem;
+            color: #4A453F;
+            margin-bottom: 25px;
+        }
+
+        /* Caixa de Perfil Lateral Elegante */
+        .profile-wrapper {
+            background-color: #FFFFFF;
+            border: 1px solid #EAE3D5;
+            border-radius: 16px;
+            padding: 12px;
+            box-shadow: 0 8px 30px rgba(45, 42, 38, 0.04);
+            max-width: 240px;
+            width: 100%;
+        }
+
+        .profile-card {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: #F4EFE6;
+            position: relative;
+            border: 1px solid #EAE3D5;
+        }
+
+        .profile-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .profile-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .profile-status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+            font-size: 0.85rem;
+            color: #615B54;
+            font-weight: 500;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #2ec4b6;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 196, 182, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(46, 196, 182, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 196, 182, 0); }
+        }
+
+        /* 4. RODAPÉ ESTILO REVISTA DIGITAL */
+        footer {
+            background-color: #F4EFE6; /* Bege ligeiramente escuro */
+            padding: 80px 24px;
+            margin-top: auto;
+            border-top: 1px solid #E6DEC1;
+        }
+
+        .revista-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .revista-header {
+            text-align: center;
+            margin-bottom: 65px;
+        }
+
+        .revista-header h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 2.2rem;
+            color: #1C1A17;
+            margin-bottom: 10px;
+        }
+
+        .revista-header p {
+            font-size: 1.1rem;
+            color: #615B54;
+        }
+        /* Nova grelha para Soft Skills, Ferramentas e Certificações */
+        .header-skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .skills-block {
+            background: #FFFFFF;
+            border: 1px solid #EAE3D5;
+            border-radius: 12px;
+            padding: 16px 20px;
+            box-shadow: 0 4px 15px rgba(45, 42, 38, 0.02);
+        }
+
+        .skills-block h3 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.15rem;
+            color: #1C1A17;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid #FAF6F0;
+            padding-bottom: 10px;
+        }
+
+        .skills-block h3 i {
+            color: #005C8A;
+        }
+
+        /* Listas de Ferramentas */
+        .tool-icons-list, .soft-skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tool-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: #FAF6F0;
+            border: 1px solid #EAE3D5;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #2D2A26;
+            transition: all 0.2s ease;
+        }
+
+        .tool-badge:hover {
+            background-color: #EAF4FA;
+            border-color: #005C8A;
+            color: #005C8A;
+            transform: translateY(-2px);
+        }
+
+        .soft-badge {
+            display: inline-block;
+            background-color: #FDFBF7;
+            border: 1px solid #EAE3D5;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #615B54;
+        }
+
+        /* Certificações */
+        .cert-links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .cert-link-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background-color: #FAF6F0;
+            border: 1px solid #EAE3D5;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #2D2A26;
+            transition: all 0.2s ease;
+        }
+
+        .cert-link-item:hover {
+            border-color: #005C8A;
+            background-color: #EAF4FA;
+            transform: translateY(-2px);
+        }
+
+        .cert-icon {
+            font-size: 1.8rem;
+            color: #FF9900; /* Cor AWS */
+            background: #FFFFFF;
+            padding: 6px;
+            border-radius: 6px;
+            border: 1px solid #EAE3D5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+        }
+
+        .cert-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cert-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #1C1A17;
+        }
+
+        .cert-verify {
+            font-size: 0.75rem;
+            color: #005C8A;
+            font-weight: bold;
+            margin-top: 2px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Grelha Dinâmica da Revista */
+        #portifoliocompleto {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        /* Alerta de pesquisa sem resultados */
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+            background: #FFFFFF;
+            border-radius: 12px;
+            border: 1px dashed #D5CDBC;
+            color: #615B54;
+        }
+
+        /* Cards da Revista */
+        .card-revista {
+            background: #FFFFFF;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(45, 42, 38, 0.05);
+            border: 1px solid #EAE3D5;
+            border-top: 5px solid #005C8A;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-revista:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(45, 42, 38, 0.08);
+        }
+
+        .categoria {
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #005C8A;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .card-revista h3 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.4rem;
+            color: #1C1A17;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .card-revista p {
+            font-size: 1rem;
+            color: #5C564E;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 25px;
+        }
+
+        .tags span {
+            background: #EAF4FA;
+            color: #005C8A;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+
+        .btn-link {
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            background-color: #005C8A;
+            color: #FFFFFF;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-link:hover {
+            background-color: #004466;
+        }
+
+        /* 5. DIVISÓRIA ELEGANTE */
+        .divisoria {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #D5CDBC, transparent);
+            margin: 60px 0;
+        }
+
+        /* 6. SECÇÃO DE CONTACTO E REDES SOCIAIS */
+        .footer-interativo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+        
+        .info-redes {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .info-redes h3 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.8rem;
+            color: #1C1A17;
+            margin-bottom: 15px;
+        }
+
+        .info-redes p {
+            font-size: 1.05rem;
+            color: #5C564E;
+            margin-bottom: 30px;
+        }
+
+        /* Links das Redes Sociais e Botões de Ação */
+        .social-container-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: #FFFFFF;
+            color: #005C8A;
+            border-radius: 50%;
+            border: 1px solid #EAE3D5;
+            font-size: 1.3rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .social-btn:hover {
+            background-color: #005C8A;
+            color: #FFFFFF;
+            transform: translateY(-3px);
+            border-color: #005C8A;
+        }
+
+        /* Botão Elegante de Download de CV */
+        .btn-cv {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #FFFFFF;
+            color: #005C8A;
+            padding: 14px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            border: 1px solid #005C8A;
+            transition: all 0.2s ease;
+            max-width: fit-content;
+        }
+
+        .btn-cv:hover {
+            background-color: transparent;
+            color: #2D2A26;
+            border-color: #2D2A26;
+            transform: translateY(-2px);
+        }
+         /* 7. RODAPÉ DE DIREITOS RESERVADOS */
+        .copyright-footer {
+            background-color: #FAF6F0; /* Fundo bege suave igual ao body */
+            color: #615B54;
+            text-align: center;
+            padding: 24px 20px;
+            font-size: 0.85rem;
+            border-top: 1px solid #E6DEC1;
+            width: 100%;
+        }
+
+        
+    </style>
+</head>
+<body>
+
+    <!-- 1. BARRA SUPERIOR FIXA (Com Menu de Navegação) -->
+    <header class="navbar">
+        <a href="#" class="navbar-brand">Érica Silva</a>
+        <nav class="nav-menu">
+            <a href="#perfil" class="nav-link">Perfil</a>
+            <span class="nav-divider">|</span>
+            <a href="#projetos" class="nav-link">Projetos</a>
+            <span class="nav-divider">|</span>
+            <a href="#contacto" class="nav-link">Contato</a>
+        </nav>
+    </header>
+
+    <!-- 2. APRESENTAÇÃO COM CAIXA LATERAL DE IMAGEM -->
+    <main class="hero-container" id="perfil">
+        <div class="hero-text">
+            <p class="subtitle-top">Tecnologa em Gestão em TI e Cientista da Computação em Formação</p>
+            <h2>Olá, sou a <span>Érica, </span></h2>
+            <p>Estudante de Ciência da Computação e profissional com experiência em análise de processos, indicadores e operações. Utilizo SQL, Python e Power BI para explorar dados, criar dashboards e gerar insights que apoiam decisões de negócio. Aqui compartilho projetos que demonstram minha evolução e aplicação prática em Análise de Dados.</p>
+        </div>
+        
+        <!-- Caixa Lateral Direita para Imagem do Perfil -->
+        <div class="profile-wrapper">
+            <div class="profile-card">
+                <!-- Substituir o link temporário abaixo com o caminho da tua fotografia real -->
+                <img src="imagem/fotoperfil.jpeg" alt="Érica Silva" id="fotoPerfil" onerror="this.src='https://placehold.co/400x400/005C8A/FFFFFF?text=ES'">
+            </div>
+            <div class="profile-status">
+                <span class="status-dot"></span>
+                <span>Disponível para Estágio em Análise de Dados</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- 3. RODAPÉ DINÂMICO (Revista Digital & Contactos) -->
+    <footer>
+        <div class="revista-container" id="projetos">
+            
+            <div class="revista-header">
+                <h3>Cursos, Conquistas Práticas, Certificações e Insights </h3>
+                <p>Explore os meus projetos mais recentes, cada projeto é uma peça da minha jornada de aprendizagem e crescimento profissional, demonstrando a aplicação prática dos meus conhecimentos em Análise de Dados e Cloud Computing.</p>
+            </div>
+             <!-- NOVO PAINEL DE COMPETÊNCIAS INTEGRADO NO CABEÇALHO -->
+                <div class="header-skills-grid">
+                    
+                    <!-- Bloco de Ferramentas com Ícones -->
+                    <div class="skills-block">
+                        <h3><i class="fa-solid fa-laptop-code"></i> Ferramentas & Tecnologias</h3>
+                        <div class="tool-icons-list">
+                            <span class="tool-badge" title="Python"><i class="fa-brands fa-python"></i> Python</span>
+                            <span class="tool-badge" title="Java"><i class="fa-brands fa-java"></i> Java</span>
+                            <span class="tool-badge" title="SQL"><i class="fa-solid fa-database"></i> SQL</span>
+                            <span class="tool-badge" title="AWS"><i class="fa-brands fa-aws"></i> AWS Cloud</span>
+                            <span class="tool-badge" title="Power BI"><i class="fa-solid fa-chart-simple"></i> Power BI</span>
+                            <span class="tool-badge" title="Excel"><i class="fa-solid fa-file-excel"></i> Excel</span>
+                            <span class="tool-badge" title="PostgreSQL"><i class="fa-solid fa-server"></i> PostgreSQL</span>
+                            <span class="tool-badge" title="HTML5"><i class="fa-brands fa-html5"></i> HTML5</span>
+                            <span class="tool-badge" title="CSS3"><i class="fa-brands fa-css3-alt"></i> CSS3</span>
+                        </div>
+                    </div>
+                        <!-- Bloco de Soft Skills -->
+                    <div class="skills-block">
+                        <h3><i class="fa-solid fa-brain"></i> Soft Skills</h3>
+                        <div class="soft-skills-list">
+                            <span class="soft-badge">Pensamento Analítico</span>
+                            <span class="soft-badge">Atenção aos Detalhes</span>
+                            <span class="soft-badge">Comunicação Interfuncional</span>
+                            <span class="soft-badge">Resolução de Problemas</span>
+                            <span class="soft-badge">Visão de Negócio</span>
+                        </div>
+                    </div>
+                      <!-- Bloco de Certificações com Link e Ícones -->
+                    <div class="skills-block">
+                        <h3><i class="fa-solid fa-award"></i> Certificações</h3>
+                        <div class="cert-links-list">
+                            <a href="https://www.credly.com/badges/d764de20-dc70-413b-a9cd-7310739086b9/linked_in_profile" target="_blank" class="cert-link-item" title="Verificar credencial AWS">
+                                <i class="fa-brands fa-aws cert-icon"></i>
+                                <div class="cert-info">
+                                    <span class="cert-title">AWS Certified Cloud Practitioner</span>
+                                    <span class="cert-verify"><i class="fa-solid fa-arrow-up-right-from-square"></i> Verificar Credencial</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- ALVO DO JAVASCRIPT: Projetos e Certificações carregados dinamicamente -->
+            <div id="portifoliocompleto"></div>
+            
+            <!-- 4. DIVISÓRIA ELEGANTE -->
+            <hr class="divisoria">
+
+            <!-- 5. SECÇÃO DE REDES SOCIAIS, DOWNLOAD E CONTACTO -->
+            <div class="footer-interativo" id="contacto">
+                
+                <!-- Lado Esquerdo: Redes Sociais e Botão para Baixar CV -->
+                <div class="info-redes">
+                    <h3>Obrigada pela visita! 🚀</h3>
+                    <p>Estou em busca de oportunidades de <strong>Estágio em Análise de Dados</strong> e sempre aberta para trocar experiências sobre tecnologia, dados e inovação.</p>
+                    
+                    <div class="social-container-block">
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/in/ericabarbosaanalista/" target="_blank" class="social-btn" title="LinkedIn">
+                                <i class="fa-brands fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://github.com/Erycca/Erycca" target="_blank" class="social-btn" title="GitHub">
+                                <i class="fa-brands fa-github"></i>
+                            </a>
+                            <a href="mailto:erycca20@gmail.com" class="social-btn" title="Enviar Email">
+                                <i class="fa-regular fa-envelope"></i>
+                            </a>
+                        </div>
+                        
+                        <!-- Link de Download de Currículo -->
+                        <a href="Curriculo/Curriculo_EricaDaSilvaBarbosa_EstágioDados.pdf" download="Curriculo_Erica_Silva.pdf" class="btn-cv" title="Descarregar Currículo PDF">
+                            <i class="fa-solid fa-file-arrow-down"></i>
+                            <span>Baixar Currículo</span>
+                        </a>
+                    </div>
+                </div>
+            
+    </footer>
+     <!-- 7. NOVO RODAPÉ DE DIREITOS RESERVADOS -->
+    <div class="copyright-footer">
+        <p>Desenvolvido por ©2026 Érica Silva</p>
+    </div>
+
+    <!-- 6. JAVASCRIPT INTEGRADO (Dinamismo de busca e renderização) -->
+    <script>
+        // Array de dados que alimenta a tua "Revista Digital" dinamicamente
+        const meusProjetos = [
+            {
+                titulo: "Bancos de Dados Relacionais com Amazon RDS",
+                categoria: "Cloud & SQL",
+                descricao: "Laboratório prático focado na modelação, segurança, parametrização e deploy de bases de dados relacionais escaláveis na infraestrutura AWS.",
+                linkLinkedIn: "https://www.linkedin.com/posts/ericabarbosaanalista_cloud-activity-7238719055090614273-0ozE?utm_source=share&utm_medium=member_desktop&rcm=ACoAABHg-Z0B9HLqfjajJdn4yB9DosK2byo2Snw", 
+                tecnologias: ["AWS RDS", "PostgreSQL", "Cloud Computing", "SQL"]
+            },
+            {
+                titulo: "Agenda Virtual Intelligent",
+                categoria: "Python",
+                descricao: "Projeto académico, aplicação interativa desenvolvida em Python para o gerenciamento simplificado de contatos",
+                linkLinkedIn: "https://github.com/Erycca/agenda_",
+                tecnologias: ["Python"]
+            },
+            {
+                titulo: " Dashboard de Análise de Salários na Área de Dados",
+                categoria: "Academia",
+                descricao: "Projeto dashboard interativo desenvolvido em Python com Streamlit, que permite explorar dados salariais da área de dados de forma dinâmica e visual.",
+                linkLinkedIn: "https://github.com/Erycca/imersao-dados-python",
+                tecnologias:  ["Python", "Pandas", "Matplotlib", "Seaborn", "Análise de Dados", "Visualização de Dados"]
+            },
+            //{
+                //titulo: "Dashboard de Inteligência de Negócio (BI)",
+                //categoria: "Análise de Dados",
+                //descricao: "Criação de dashboards interativos conectando dados estruturados a análises preditivas para suporte de decisões corporativas.",
+                //linkLinkedIn: "https://www.linkedin.com/in/ericasilvati",
+                //tecnologias: ["Power BI", "SQL", "Modelagem de Dados", "KPIs"]
+            //}
+        ];
+
+        // Função responsável por renderizar os cards baseados na lista passada
+        function renderizarProjetos(lista) {
+            const container = document.getElementById("portifoliocompleto");
+            if (!container) return;
+            
+            // Limpa o conteúdo anterior
+            container.innerHTML = "";
+
+            if (lista.length === 0) {
+                container.innerHTML = `
+                    <div class="no-results">
+                        <i class="fa-solid fa-magnifying-glass" style="font-size: 2rem; margin-bottom: 10px; color: #8C8375;"></i>
+                        <p>Não foram encontrados projetos ou tecnologias correspondentes à tua pesquisa.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            lista.forEach(projeto => {
+                const card = document.createElement("div");
+                card.className = "card-revista";
+                
+                card.innerHTML = `
+                    <div>
+                        <span class="categoria">${projeto.categoria}</span>
+                        <h3>${projeto.titulo}</h3>
+                        <p>${projeto.descricao}</p>
+                    </div>
+                    <div>
+                        <div class="tags">
+                            ${projeto.tecnologias.map(tech => `<span>${tech}</span>`).join('')}
+                        </div>
+                        <a href="${projeto.linkLinkedIn}" target="_blank" class="btn-link">Ler Artigo Completo</a>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+
+        // Configuração inicial da página e escutas de eventos
+        document.addEventListener("DOMContentLoaded", () => {
+            // Renderiza todos os projetos por padrão
+            renderizarProjetos(meusProjetos);
+        });
+    </script>
+</body>
+</html>
