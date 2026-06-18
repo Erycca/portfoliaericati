@@ -1,30 +1,28 @@
- 🌐 Portfólio Pessoal
+ ##🌐 Portfólio Pessoal
 
 Este projeto é um portfólio desenvolvido em HTML | CSS | JavaScript, com o objetivo de apresentar de forma clara e acessível minhas experiências, projetos, habilidades técnicas e trajetória profissional na área de **Tecnologia da Informação e Desenvolvimento Back-End**.
 
-🚀 Funcionalidades
+#🚀 Funcionalidades
 
 - Apresentação pessoal e profissional
 - Seção de projetos com links para repositórios
 - Estilo visual responsivo
 - Design limpo, moderno e centrado na experiência do usuário
 
-🛠️ Tecnologias Utilizadas
+#🛠️ Tecnologias Utilizadas
 
 - HTML5
 - CSS3
 - JavaScript (básico)
 - Git & GitHub
 
-## 📌 Objetivo
+# 📌 Objetivo
 
-O objetivo deste portfólio é consolidar minha presença digital, facilitar o acesso aos meus projetos e apoiar minha transição de carreira para o desenvolvimento back-end com foco em Dados, Python e Java**, além de demonstrar meus conhecimentos técnicos e organização de código.
+Sou Tecnóloga em Gestão de TI, estudante de Ciência da Computação e apaixonada por transformar dados em informações estratégicas para apoiar a tomada de decisões e o objetivo deste portfólio é consolidar minha presença digital, facilitar o acesso aos meus projetos.
 
-## 👩‍💻 Sobre mim
 
-Sou estudante de Ciência da Computação, com experiência em Gestão de projetos, análise de processos, possuo Certificação em  AWS Cloud Practitioner.
 
-## 📫 Contato
+# 📫 Contato
 
 - E-mail: erycca20@gmail.com
 
